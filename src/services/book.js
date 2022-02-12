@@ -14,8 +14,10 @@ function deleteBook() {
 
 }
 
-function getBooks() {
-
+function getBooks(name=null, reading=null, finished=null) {
+	return books.filter(book => 
+		(!name || book.name.includes(name)) && (!reading || book.reading === reading) && 
+		(!finished || book.finished === finished));
 }
 
 function getBookById(id) {
