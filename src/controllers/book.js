@@ -6,6 +6,7 @@ const Status = require("../dtos/Status");
 const InvalidReadPageValueException = require("../errors/InvalidReadPageValueException");
 const BaseException = require("../errors/BaseException");
 const converter = require("../utils/converter");
+const GetBooksItemResponse = require("../dtos/GetBooksItemResponse");
 
 function addBook(request, h) {
 	let status = Status.SUCCESS;
@@ -56,13 +57,19 @@ function addBook(request, h) {
 
 function getBooks(request, h) {
 	const { name, reading, finished } = request.query;
-	const books = service.getBooks(name, reading, finished);
+	const books = service
+			.getBooks(name, reading, finished)
+			.map(book => GetBooksItemResponse.fromBook(book));
 	const data = new Response(Status.SUCCESS, null, { books });
 	const response = h.response(data);
 
 	response.code(200);
   
 	return response;
+}
+
+function getBookById(request, h) {
+
 }
 
 module.exports = {
