@@ -1,6 +1,6 @@
 class GetBooksItemResponse {
 	constructor(id, name, publisher) {
-    this.id = id;
+		this.id = id;
 		this.name = name;
 		this.publisher = publisher;
 	}

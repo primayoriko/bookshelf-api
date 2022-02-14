@@ -1,17 +1,10 @@
 const Book = require("../models/Book");
 const { books } = require("../data/data");
+const IDNotFoundException = require("../errors/IDNotFoundException");
 
 function addBook(book) {
 	books.push(book);
 	return book;
-}
-
-function updateBook() {
-
-}
-
-function deleteBook() {
-
 }
 
 function getBooks(name=null, reading=null, finished=null) {
@@ -21,13 +14,29 @@ function getBooks(name=null, reading=null, finished=null) {
 }
 
 function getBookById(id) {
+	const res = books.filter(book => book.id === id);
+	return res.length? res[0] : null;	
+}
+
+function deleteBookById(id) {
+	for(idx in books) {
+		if(books[idx].id === id) {
+			books.splice(idx, 1);
+			return;
+		}
+	}
+
+	throw new IDNotFoundException();
+}
+
+function updateBook() {
 
 }
 
 module.exports = {
 	addBook,
-	deleteBook,
-	updateBook,
 	getBooks,
-	getBookById
+	getBookById,
+	deleteBookById,
+	updateBook
 };

@@ -8,7 +8,17 @@ module.exports = [
 	},
 	{
 		method: "GET",
+		path: "/books/{id}",
+		handler: controller.getBookById
+	},
+	{
+		method: "GET",
 		path: "/books",
 		handler: controller.getBooks
+	},
+	{
+		method: "DELETE",
+		path: "/books/{id}",
+		handler: controller.deleteBookById
 	},
 ];
