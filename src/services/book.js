@@ -1,6 +1,6 @@
-const Book = require("../models/Book");
 const { books } = require("../data/data");
 const IDNotFoundException = require("../errors/IDNotFoundException");
+const InvalidReadPageValueException = require("../errors/InvalidReadPageValueException");
 
 function addBook(book) {
 	books.push(book);
@@ -19,7 +19,7 @@ function getBookById(id) {
 }
 
 function deleteBookById(id) {
-	for(idx in books) {
+	for(const idx in books) {
 		if(books[idx].id === id) {
 			books.splice(idx, 1);
 			return;
@@ -29,8 +29,27 @@ function deleteBookById(id) {
 	throw new IDNotFoundException();
 }
 
-function updateBook() {
+function updateBookById(id, changes) {
+	let book = null;
+	for(const bk of books) {
+		if(bk.id === id) {
+			book = bk;
+			break;
+		}
+	}
 
+	if(!book)
+		throw new IDNotFoundException();
+
+	for(const key in changes) {
+		book[key] = changes[key];
+	}
+
+	if(book.readPage > book.pageCount)
+		throw new InvalidReadPageValueException();
+
+	book.finished = book.readPage === book.pageCount;
+	book.updatedAt = new Date().toISOString();
 }
 
 module.exports = {
@@ -38,5 +57,5 @@ module.exports = {
 	getBooks,
 	getBookById,
 	deleteBookById,
-	updateBook
+	updateBookById
 };

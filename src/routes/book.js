@@ -21,4 +21,9 @@ module.exports = [
 		path: "/books/{id}",
 		handler: controller.deleteBookById
 	},
+	{
+		method: "PUT",
+		path: "/books/{id}",
+		handler: controller.updateBookById
+	},
 ];

@@ -9,6 +9,7 @@ const converter = require("../utils/converter");
 const GetBooksItemResponse = require("../dtos/GetBooksItemResponse");
 const GetBookDetailResponse = require("../dtos/GetBookDetailResponse");
 const IDNotFoundException = require("../errors/IDNotFoundException");
+const BookUpdateRequest = require("../dtos/BookUpdateRequest");
 
 function addBook(request, h) {
 	let status = Status.SUCCESS;
@@ -116,7 +117,44 @@ function deleteBookById(request, h) {
 	}
   
 	const response = h.response(new Response(status, message));
-	
+
+	response.code(code);
+  
+	return response;
+}
+
+function updateBookById(request, h) {
+	let status = Status.SUCCESS;
+	let message = "Buku berhasil diperbarui";
+	let code = 200;
+
+	try {
+		const { id } = request.params;
+		const dto = BookUpdateRequest.fromRequest(request.payload);
+
+		service.updateBookById(id, dto.toChangesList());
+	} catch (err) {
+		if (err instanceof BaseException) {
+			message = "Gagal memperbarui buku.";
+			status = Status.FAIL;
+			code = 400;
+
+			if(err instanceof NoNameException) {
+				message = message.concat(" Mohon isi nama buku");
+			} else if (err instanceof IDNotFoundException) {
+				message = message.concat(" Id tidak ditemukan");
+				code = 404;
+			} else if (err instanceof InvalidReadPageValueException) {
+				message = message.concat(" readPage tidak boleh lebih besar dari pageCount");
+			}
+		} else {
+			message = "Gagal memperbarui buku";
+			status = Status.ERROR;
+			code = 500;
+		}
+	}
+  
+	const response = h.response(new Response(status, message));
 	response.code(code);
   
 	return response;
@@ -126,5 +164,6 @@ module.exports = {
 	addBook,
 	getBooks,
 	getBookById,
-	deleteBookById
+	deleteBookById,
+	updateBookById
 };
