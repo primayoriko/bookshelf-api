@@ -22,7 +22,7 @@ function addBook(request, h) {
 		let book = converter.convertBookAddRequestDTOtoBook(dto);
 
 		book = service.addBook(book);
-		data = new Response(status, message, { id: book.id });
+		data = new Response(status, message, { bookId: book.id });
 	} catch (err) {
 		if (err instanceof BaseException) {
 			message = "Gagal menambahkan buku.";
@@ -81,8 +81,6 @@ function getBookById(request, h) {
 	if (!book) {
 		code = 404;
 		data = new Response(Status.FAIL, "Buku tidak ditemukan");
-
-		console.log(data);
 	} else {
 		book = GetBookDetailResponse.fromBook(book);
 		data = new Response(Status.SUCCESS, null, { book });

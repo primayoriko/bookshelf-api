@@ -8,9 +8,15 @@ function addBook(book) {
 }
 
 function getBooks(name=null, reading=null, finished=null) {
+	if(reading !== null)
+		reading = +reading === 1;
+
+	if(finished !== null)
+		finished = +finished === 1;
+
 	return books.filter(book => 
-		(!name || book.name.includes(name)) && (!reading || book.reading === reading) && 
-		(!finished || book.finished === finished));
+		(name === null || book.name.toLowerCase().includes(name.toLowerCase())) && 
+		(reading === null || book.reading === reading) && (finished === null || book.finished === finished));
 }
 
 function getBookById(id) {
