@@ -13,6 +13,7 @@ const NoNameException = require("../errors/NoNameException");
     "reading": boolean
   }
 */
+
 class BookAddRequest {
 	constructor(name, year, author, summary, 
 		publisher, pageCount, readPage, reading) {

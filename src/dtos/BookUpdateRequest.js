@@ -1,16 +1,3 @@
-/*
-  {
-    "name": string,
-    "year": number,
-    "author": string,
-    "summary": string,
-    "publisher": string,
-    "pageCount": number,
-    "readPage": number,
-    "reading": boolean
-  }
-*/
-
 const InvalidReadPageValueException = require("../errors/InvalidReadPageValueException");
 const NoNameException = require("../errors/NoNameException");
 
@@ -48,30 +35,6 @@ class BookUpdateRequest {
 				changes[key] = this[key];
 			}
 		}
-    
-		// if(this.name !== undefined)
-		//   changes.name = this.name;
-      
-		// if(this.year !== undefined)
-		//   changes.year = this.year;
-      
-		// if(this.author !== undefined)
-		//   changes.author = this.author;
-      
-		// if(this.summary !== undefined)
-		//   changes.summary = this.summary;
-
-		// if(this.name !== undefined)
-		//   changes.name = this.name;
-
-		// if(this.name !== undefined)
-		//   changes.name = this.name;
-
-		// if(this.name !== undefined)
-		//   changes.name = this.name;
-
-		// if(this.name !== undefined)
-		//   changes.name = this.name;
 
 		return changes;
 	}
