@@ -9,6 +9,7 @@ module.exports = {
 		"ecmaVersion": "latest"
 	},
 	"rules": {
+		"no-console": "off",
 		"indent": [
 			"error",
 			"tab"
