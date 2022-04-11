@@ -1,9 +1,7 @@
 const Hapi = require("@hapi/hapi");
 const bookRoutes = require("./routes/book");
- 
-init();
- 
-async function init () {
+
+const start = async () => {
 	const server = Hapi.server({
 		port: 5000,
 		host: "localhost",
@@ -18,4 +16,6 @@ async function init () {
 
 	await server.start();
 	console.log(`Server successfully run at ${server.info.uri}`);
-}
+};
+
+start();
