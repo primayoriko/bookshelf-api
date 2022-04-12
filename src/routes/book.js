@@ -1,29 +1,29 @@
-const controller = require("../controllers/book");
+const handler = require("../handlers/book");
 
 module.exports = [
 	{
 		method: "POST",
 		path: "/books",
-		handler: controller.addBook
+		handler: handler.addBook
 	},
 	{
 		method: "GET",
 		path: "/books/{id}",
-		handler: controller.getBookById
+		handler: handler.getBookById
 	},
 	{
 		method: "GET",
 		path: "/books",
-		handler: controller.getBooks
+		handler: handler.getBooks
 	},
 	{
 		method: "DELETE",
 		path: "/books/{id}",
-		handler: controller.deleteBookById
+		handler: handler.deleteBookById
 	},
 	{
 		method: "PUT",
 		path: "/books/{id}",
-		handler: controller.updateBookById
+		handler: handler.updateBookById
 	},
 ];

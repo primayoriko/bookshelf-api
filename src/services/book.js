@@ -37,6 +37,7 @@ function deleteBookById(id) {
 
 function updateBookById(id, changes) {
 	let book = null;
+
 	for(const bk of books) {
 		if(bk.id === id) {
 			book = bk;

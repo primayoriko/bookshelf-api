@@ -42,10 +42,10 @@ function addBook(request, h) {
 
 		data = new Response(status, message);
 	}
-  
+
 	const response = h.response(data);
 	response.code(code);
-  
+
 	return response;
 }
 
@@ -58,7 +58,7 @@ function getBooks(request, h) {
 	const response = h.response(data);
 
 	response.code(200);
-  
+
 	return response;
 }
 
@@ -104,11 +104,11 @@ function deleteBookById(request, h) {
 			code = 500;
 		}
 	}
-  
+
 	const response = h.response(new Response(status, message));
 
 	response.code(code);
-  
+
 	return response;
 }
 
@@ -142,10 +142,10 @@ function updateBookById(request, h) {
 			code = 500;
 		}
 	}
-  
+
 	const response = h.response(new Response(status, message));
 	response.code(code);
-  
+
 	return response;
 }
 
